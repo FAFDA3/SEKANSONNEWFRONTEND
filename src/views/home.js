@@ -3,12 +3,15 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 
 import Desktop9 from './desktop9'
+import { WalletConnectProvider } from '@walletconnect/react-native';
+
 
 import './page.css'
 import './desktop9.css'
 import abi from './ABI.json';
 import ok from './ok.png';
 import not from './not.png';
+import hourglass from './hourglass.gif';
 
 import { useEffect, useState } from "react";
 import {ethers} from "ethers";
@@ -105,7 +108,23 @@ const Home = (props) => {
 
       }
 
+      // funzione clessidra
+  const startTimer = () => {
+      // codice per far girare la clessidra
+      console.log("working...");
+      return(
+        <div id="gif-container">
+            <img src={hourglass} id="gif" alt="animated gif">
+            </img>
+        </div>
+        )
+    }
+
+
     const returndata = async () => {
+      //const intervalId = setInterval(startTimer, 1000);
+      startTimer();
+
       let input = document.getElementById("_ID_url").value;
       let input2 = document.getElementById("_ID_url2").value;
       let _check1 = await welcomenft.isWhitelisted(input);
@@ -129,12 +148,14 @@ const Home = (props) => {
       }
 
       if(_check1 != true && _check2 != true){
-        await welcomenft.mint(1, input, input2 , {value: cost });
+        await welcomenft.mint(1, input, input2 , {value: cost, gasLimit: 20000 });
 
       }
 
       console.log(input);
       console.log(input2);
+      //clearInterval(intervalId);
+
 
     }
 
@@ -215,6 +236,22 @@ const Home = (props) => {
 
     const retire_r = async () =>{
         await   welcomenft.retire_reward();
+    }
+
+    async function switchaddress_() {
+        const provider_ = new ethers.providers.Web3Provider(window.ethereum, "any");
+        let accounts_ = await provider_.send("eth_requestAccounts", []);
+        let account_ = accounts_[0];
+        provider_.on('accountsChanged', function (accounts_) {
+            account_ = accounts_[0];
+            console.log(address_); // Print new address
+        });
+
+        const signer_ = provider_.getSigner();
+
+        const address_ = await signer_.getAddress();
+
+        console.log(address_);
     }
 
 
@@ -389,6 +426,8 @@ const Home = (props) => {
 
           return(
 
+
+
             <div className="desktop9-container">
               <Helmet>
                 <title>sekanson mint</title>
@@ -453,6 +492,16 @@ const Home = (props) => {
                     </div>
                   </div>
                 </div>
+
+
+
+                <div id="gif-container">
+                    <img src={hourglass} id="gif" alt="animated gif">
+                    </img>
+                </div>
+
+
+
                 <div className="desktop9-frame427319583">
                   <div className="desktop9-frame427319585">
                     <span className="desktop9-text04">Whitelist Dashboard</span>
@@ -527,6 +576,11 @@ const Home = (props) => {
                   <button className="desktop9-button5 button">ODLABS</button>
 
                 </div>
+
+
+
+
+
                 <div className="desktop9-frame4273195841">
                   <div className="desktop9-frame4273195842">
                     <span className="desktop9-text17">Influencer Dashboard</span>
@@ -619,7 +673,7 @@ const Home = (props) => {
                     />
                   </div>
                 </div>
-                <button className="desktop9-button6 button" onClick = {switchAddress}>Reset</button>
+                <button className="desktop9-button6 button" onClick ={startTimer}>Reset</button>
               </div>
             </div>
 
