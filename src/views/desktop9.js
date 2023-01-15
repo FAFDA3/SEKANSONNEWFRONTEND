@@ -38,24 +38,24 @@ const Desktop9 = (props) => {
 //
 //
   let list = [];
-//  const [aconnected_, asetconnection_] = useState(false);
-//    const [whitelist, setwhitelist] = useState();
-//    const [nft_cost, set_nft_cost] = useState();
-   // const [check1, setcheck1] = useState();
-   // const [check2, setcheck2] = useState();
+ const [connected_, setconnection_] = useState(false);
+   const [whitelist, setwhitelist] = useState();
+   const [nft_cost, set_nft_cost] = useState();
+   const [check1, setcheck1] = useState();
+   const [check2, setcheck2] = useState();
 //
-//   const[pr1, setpr1] = useState();
-//   const[pr2, setpr2] = useState();
-//   const[pr3, setpr3] = useState();
-//   const[pr4, setpr4] = useState();
-//   const[pr5, setpr5] = useState();
-//
-//
-//   const[addpr1, setaddpr1] = useState();
-//   const[addpr2, setaddpr2] = useState();
-//   const[addpr3, setaddpr3] = useState();
-//   const[addpr4, setaddpr4] = useState();
-//   const[addpr5, setaddpr5] = useState();
+  const[pr1, setpr1] = useState();
+  const[pr2, setpr2] = useState();
+  const[pr3, setpr3] = useState();
+  const[pr4, setpr4] = useState();
+  const[pr5, setpr5] = useState();
+
+
+  const[addpr1, setaddpr1] = useState();
+  const[addpr2, setaddpr2] = useState();
+  const[addpr3, setaddpr3] = useState();
+  const[addpr4, setaddpr4] = useState();
+  const[addpr5, setaddpr5] = useState();
 //
 //
 //
@@ -95,48 +95,48 @@ const Desktop9 = (props) => {
   // }
 
   //
-  const connection_ = async  () =>{
+  // const connection_ = async  () =>{
 
-              await window.ethereum.enable();
-              provider = new ethers.providers.Web3Provider(window.ethereum);
-              signer = await provider.getSigner();
-              client_address = await signer.getAddress();
-              setconnection(true);
+  //             await window.ethereum.enable();
+  //             provider = new ethers.providers.Web3Provider(window.ethereum);
+  //             signer = await provider.getSigner();
+  //             client_address = await signer.getAddress();
+  //             setconnection(true);
 
-              welcomenft = new ethers.Contract( smart_contract,  abi, signer);
-              n_address = await welcomenft.n_whitelisted();
-              cost = await  welcomenft.cost();
+  //             welcomenft = new ethers.Contract( smart_contract,  abi, signer);
+  //             n_address = await welcomenft.n_whitelisted();
+  //             cost = await  welcomenft.cost();
 
-              const isPR = await welcomenft.isPR(client_address);
-              console.log(isPR);
-              if(isPR == false){
-                  const welcomeboard = await welcomenft.welcome(client_address);
-                  const _money = await welcomeboard.money/1;
-                  console.log(_money);
-                  setmoney(_money);
+  //             const isPR = await welcomenft.isPR(client_address);
+  //             console.log(isPR);
+  //             if(isPR == false){
+  //                 const welcomeboard = await welcomenft.welcome(client_address);
+  //                 const _money = await welcomeboard.money/1;
+  //                 console.log(_money);
+  //                 setmoney(_money);
 
-                } else if (isPR== true){
-                  const welcomeboard = await welcomenft.welcome_PR(client_address);
-                  const _money = await welcomeboard.money/1;
-                  console.log(_money);
-                  setmoney(_money);
+  //               } else if (isPR== true){
+  //                 const welcomeboard = await welcomenft.welcome_PR(client_address);
+  //                 const _money = await welcomeboard.money/1;
+  //                 console.log(_money);
+  //                 setmoney(_money);
 
-                }
+  //               }
 
-              console.log (cost);
-              set_nft_cost(cost/1000000000000000000);
+  //             console.log (cost);
+  //             set_nft_cost(cost/1000000000000000000);
 
-              console.log(n_address);
-              for(let i=0; i<=(n_address-1); i++ ){
-                  list[i] =  await welcomenft.whitelist(i);
+  //             console.log(n_address);
+  //             for(let i=0; i<=(n_address-1); i++ ){
+  //                 list[i] =  await welcomenft.whitelist(i);
 
-                }
+  //               }
 
-              setwhitelist(list);
-              console.log(list);
-              prdata();
-              console.log("data");
-  }
+  //             setwhitelist(list);
+  //             console.log(list);
+  //             prdata();
+  //             console.log("data");
+  // }
 
 
   // const retire_r = async () =>{
@@ -414,7 +414,7 @@ const Desktop9 = (props) => {
             />
           </div>
         </div>
-        <button className="desktop9-button6 button" onClick = {connection_}>Reset</button>
+        {/* <button className="desktop9-button6 button" onClick = {connection_}>Reset</button> */}
       </div>
     </div>
   )

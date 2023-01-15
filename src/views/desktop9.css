@@ -690,9 +690,20 @@
   padding-bottom: 0px;
 }
 
-.check_img{
-  display: block;
+.check_img1{
+    display: block;
     height: 30px;
+    position: absolute;
+    top: 6px;
+    left: 406px;
+}
+
+.check_img2{
+    display: block;
+    height: 30px;
+    position: absolute;
+    top: 55px;
+    left: 406px;
 }
 
 
